@@ -1,16 +1,16 @@
 class Solution:
     def reverse(self, x: int) -> int:
-        is_negative = False
-        x = str(x)
-        if x[-1] == 0:
-            x = x[:-1]
-        elif x[0] == "-":
-            is_negative = True
-            x = x[1:]
-        x = x[::-1]
-        if is_negative:
-            x = "-" + x
-        if x < -(2**31) or x > 2**31:
+        # Convert the integer to string and reverse it
+        reversed_str = str(x)[::-1]
+
+        # Check if the original number was negative
+        if x < 0:
+            reversed_str = "-" + reversed_str[:-1]  # Remove the trailing '-'
+
+        # Convert back to integer
+        reversed_int = int(reversed_str)
+
+        # Check for 32-bit integer overflow
+        if reversed_int < -(2**31) or reversed_int > 2**31 - 1:
             return 0
-        else:
-            return int(x)
+        return reversed_int
